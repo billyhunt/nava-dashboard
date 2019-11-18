@@ -1,32 +1,48 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Billy Hunt's Nava Project
 
-## Available Scripts
+###Install instructions
 
-In the project directory, you can run:
+My project consists of two parts.  
 
-### `npm start`
+###1.  simple-node-api
+  simple-node-api is an api you run to send out batch requests.  To install
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```
+cd simple-node-api
+npm install
+npm start
+```
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+This will run a simple API on port 8000 of your machine (localhost)
 
-### `npm test`
+###2.  nava-dashboard
+This is the very beginning of a dashboard that displays the schema and converts and displays the data (the files are located here), and allows you to send the put request.  If all requests succeed, then a 201 response is given.  If any of them fail, a 500 is sent back the user gets a message to try again.  
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+To install:
+(In a separate terminal window)
+```
+cd nava-dashboard
+npm install
+npm start
+```
 
-### `npm run build`
+You can now use http://localhost:3000/ to initiate the records transfer.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+###Notes and Assumptions
+####Things the dashboards needs
+1.  Display information in a table
+2.  Have a timer to repeat request the user desires
+3.  Ability to upload new data or schemas
+4.  Better Documentation
+5.  Better Exception Handling
+6.  Fix security vulnerabilities
+7.  Design
+8.  Performance improvements.  I built this with create-react-app, which is quick to build, but probably has things we do not need in a production environment.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+####Things the API needs
+1.  A database to store which requests succeeded, and which failed.
+2.  Better exception handling
+3.  Better Documentation
+4.  Testing
+5.  Perhaps some throttling if the API is not robust
+6.  Fix CORS, which was turned off for local development of this project.
