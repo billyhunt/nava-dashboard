@@ -5,8 +5,6 @@ import booleanSchema from '../schema/booleanmeasures.csv'
 import fetch from 'isomorphic-fetch'
 import Table from './Table'
 
-import 'react-table/react-table.css'
-
 class Main extends React.Component {
   constructor(props) {
     super(props)
