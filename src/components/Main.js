@@ -4,12 +4,12 @@ import booleanData from '../data/booleanmeasures.txt'
 import booleanSchema from '../schema/booleanmeasures.csv'
 import fetch from 'isomorphic-fetch'
 
-class DataTable extends React.Component {
+class Main extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props);
     this.state = {
-      headerTitles: [],
+      statusMessage: '',
+      statusColor: '',
       dataToSend: [],
       schema: []
     };
@@ -65,12 +65,27 @@ class DataTable extends React.Component {
         });
     });
   }
-
   sendRequest = () => {
-    console.log(this.state.dataToSend)
+    fetch('http://localhost:8000', {
+      method: 'post',
+      headers: {
+        "Accept": "*/*",
+        "Content-Type": "application/json; charset=utf-8",
+      },
+      body: JSON.stringify(this.state.dataToSend)
+    }).then(res => {
+      console.log(res);
+      this.setState({
+        statusMessage: (res.status === 201) ? 'Records Received' : 'Records were not sent.  Please try again.'
+      });
+      this.setState({
+        statusColor: (res.status === 201) ? 'text-success' : 'text-danger'
+      });
+    });
   };
+
   render() {
-    const { dataToSend, schema } = this.state;
+    const { dataToSend, schema, statusMessage, statusColor } = this.state;
     return (
       <>
         <div>
@@ -82,9 +97,10 @@ class DataTable extends React.Component {
           {JSON.stringify(schema)}
         </div>
         <Button onClick={this.sendRequest} className='mt-5' variant="primary">Push To Send</Button>
+        <h4 className={"mt-5 " + statusColor}>{statusMessage}</h4>
       </>
     );
   }
 }
 
-export default DataTable
+export default Main
